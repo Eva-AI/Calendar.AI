@@ -15,7 +15,7 @@ try {
 
 const accessToken = (() => {
   if (process.argv.length!== 3){
-    console.log("using app.js with <wit-access-token>");
+    console.log("need:<wit-access-token>");
     process.exit(1);
   }
   return process.argv[2];
@@ -41,12 +41,20 @@ const actions = {
       console.log("sending...", JSON.stringify(response));
     },
 
-    newEntry({context, entities}){
+    newEvent({context, entities}){
       var time = firstEntityValue(entities, 'datetime');
       var location = firstEntityValue(entities, 'local_search_query');
 
       console.log(time);
       console.log(location);
+
+      var ableToSchedule = true;
+      if (ableToSchedule){
+        //send the event was created
+      }else{
+        //send scheduling conflict
+      }
+
 
       delete context.schedulingConflict;
       context.eventCreated = "Event Created!"
